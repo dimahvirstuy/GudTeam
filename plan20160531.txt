@@ -1,0 +1,10 @@
+    Which jobs are most crucial?
+    
+    Which components constitute core functionality (vs non-essential)?
+    
+    Which components are prerequisites for others?
+    
+    Which tasks can be delegated, and which must be collaboratively tackled?
+    
+    What is the timeline, and how does it accommodate setbacks, course changes?
+    
