@@ -62,8 +62,8 @@ public class CollisionTest extends GameObjectPhysics {
         
         color col = color( 255 * (1 + sin( offset + millis() / 1000f ))/2 , 255, 255);
         
-        stroke(col);
+        noStroke();
         fill( col );
-        rect(x, y, collisionBox.width, collisionBox.height);
+        rect(x,  y, collisionBox.width, collisionBox.height);
     }
 }

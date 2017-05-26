@@ -3,14 +3,16 @@
  * Test for player using GameObject inheritance.
  **************/
 
-import java.util.Stack;
+/*import java.util.Stack;
 
 public class PlayerTest extends GameObjectPhysics {
 
     private Texture SPRITE_IDLE = resources.SPR_PLAYER_IDLE;
     private Texture SPRITE_WALK = resources.SPR_PLAYER_WALK;
 
-    private int jimer;
+    private int jimer; // jump hold timer
+    private int fimer; // fall timer
+    private int fimer_time = 10; // How many frames of "leeway" falling
     private float airResistance = 0.05;
 
     private Stack<GameObjectPhysics> pocket; // Held Physics Objects
@@ -18,7 +20,7 @@ public class PlayerTest extends GameObjectPhysics {
     public PlayerTest() {
         super(10,190.1, resources.SPR_PLAYER_IDLE);
 
-        collisionBox = new Rectangle(8, 8);
+        collisionBox = new Rectangle(-4,0, 8, 8);
         collideWithOthers = true;
 
         gravity = 0.2f;
@@ -41,21 +43,27 @@ public class PlayerTest extends GameObjectPhysics {
 
         if (grounded) {
             jimer = 0;
+            fimer = 0;
             if (axisX == 0) {
                 animator.setTexture( SPRITE_IDLE );
             } else {
                 animator.setTexture( SPRITE_WALK );
                 image_xscale = axisX;
             }
-            if (Input.keyPressed( UP ) ) {
-                velY = -4f;
-            }
         } else {
+            fimer++;
             if (velY < 0) {
                 if (Input.keyPress(UP) && jimer < 15) {
                     jimer++;
                     velY -= 0.3f;
                 }
+            }
+        }
+
+        if (fimer < fimer_time) {
+            if (Input.keyPressed( UP ) ) {
+                velY = -4f;
+                fimer = fimer_time;
             }
         }
 
@@ -74,3 +82,4 @@ public class PlayerTest extends GameObjectPhysics {
         //rect(x, y, collisionBox.width, collisionBox.height);
     }
 }
+*/

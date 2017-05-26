@@ -31,7 +31,7 @@ public abstract class GameObject {
     protected float image_xoffset = 0.0f;
     protected float image_yoffset = 0.0f;
 
-    float image_rotation = 0.0f;
+    float image_angle = 0.0f;
 
     public GameObject(float x, float y, Texture sprite) {
        this.x = x;
@@ -49,7 +49,7 @@ public abstract class GameObject {
     public void render() {
         pushMatrix();
         translate(x, y);
-        rotate(image_rotation);
+        rotate(image_angle);
         scale( image_xscale, image_yscale );
         translate(-image_xoffset, -image_yoffset);
         image( animator.currentFrame() , 0, 0 );

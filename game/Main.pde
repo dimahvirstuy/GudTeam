@@ -11,10 +11,18 @@ public class Main {
     private long lastTime;
     private float lastTimeFactor = (1f / (1000 * 1000)) * (1f / 60f);
 
-    public void initialize() {
+    public Main() {
         handler = new GameObjectHandler();
-        handler.addObject( new PlayerTest() );
-        
+    }
+
+    public void initialize() {
+        Player player = new Player(0,0);
+        handler.addObject( player );
+        //handler.player = player; // for ease of access
+
+        //camera.viewWidth *= 2;
+        //-camera.viewHeight *= 2;
+
         /*handler.addObject( new CollisionTest( 30, 30 ) );
         handler.addObject( new CollisionTest( 90, 30 ) );
         handler.addObject( new CollisionTest( 30, 90 ) );
@@ -26,16 +34,30 @@ public class Main {
             }*/
         }
 
+        handler.addObject( new CollisionTest(16, 200 - 16) );
+        handler.addObject( new CollisionTest(64 - 16, 200 - 16) );
+
         lastTime = System.nanoTime();
     }
 
     public void update() {
-        
+
         long currentTime = System.nanoTime();
         dTime = lastTimeFactor * (currentTime - lastTime);
         lastTime = currentTime;
 
         background(0);
+
+        stroke(color(255,255,255));
+        fill(color(0,0,0));
+        // draw tiles
+        int d = 128;
+        for(int xx = d * ((int) (camera.xPos / d) - 1); xx < camera.xPos + camera.viewWidth + d; xx+=d) {
+            for(int yy = d * ((int) (camera.yPos / d) - 1); yy < camera.yPos + camera.viewHeight + d; yy+=d) {
+                rect(xx, yy, d, d);
+            } 
+        }
+        
 
         handler.loopAll(true, true);
         Input.updatePostTick();

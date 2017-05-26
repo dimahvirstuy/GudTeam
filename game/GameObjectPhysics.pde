@@ -5,11 +5,7 @@ public abstract class GameObjectPhysics extends GameObject {
 
     // Velocity
     public float velX, velY;
-    public float gravity;
     protected boolean collideWithOthers = false;
-    protected float groundFriction = 0.0;
-    protected boolean grounded = false;
-
     // Collision
     // Collision box / bounding rectangle for object. No rotations for now
     public Rectangle collisionBox;
@@ -23,7 +19,6 @@ public abstract class GameObjectPhysics extends GameObject {
         super(x,y, sprite);
         velX = 0;
         velY = 0;
-        gravity = 0.0;
         collisionBox = new Rectangle(0,0);
     }
 
@@ -31,9 +26,7 @@ public abstract class GameObjectPhysics extends GameObject {
     public void update() {
         super.update();
         if (!isStatic) {
-            velX *= (1f - groundFriction);
-            velY += gravity;
-    
+
             //System.out.println( "(" + x + ", " + y + ")" + ", next: (" + (x + velX) + ", " + (y + velY) + ")" );
             if (collideWithOthers) {
                 // Side collisions
@@ -53,7 +46,6 @@ public abstract class GameObjectPhysics extends GameObject {
                 // Top-Bottom collisions
                 if ( handler.isColliding(this, 0, velY, CollisionTest.class) ) {
                     //System.out.println("wat2");
-                    if (velY > 0) grounded = true;
                     // Keep moving until we contact the wall
         
                     y = floor(y);
@@ -64,8 +56,6 @@ public abstract class GameObjectPhysics extends GameObject {
                     y += dy - Math.signum(velY);
                     //System.out.println("new y : " + y);
                     velY = 0;
-                } else if (abs(velY) > 1) { // over 1 for leeway
-                    grounded = false;
                 }
                 y += velY;
             } else {

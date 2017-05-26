@@ -25,6 +25,9 @@ public class GameObjectHandler {
     // For physics objects with collisions
     private QuadTree collisionTree;
 
+    // For ease of access
+    public Player player;
+
     public GameObjectHandler() {
         objects = new LinkedList<GameObject>();
         objectsByClass = new HashMap<Class, LinkedList<GameObject>>();

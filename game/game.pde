@@ -21,13 +21,11 @@ void setup() {
     // Screw that I say!
     surface.setSize(PORT_WIDTH, PORT_HEIGHT);
     main = new Main();
+    handler = main.handler;
+
     camera = new Camera();
     resources = new Resources();
     main.initialize();
-    handler = main.handler;
-
-    camera.viewWidth = PORT_WIDTH / 3;
-    camera.viewHeight = PORT_HEIGHT / 3;
 
     smooth(0); // No anti-aliasing
 

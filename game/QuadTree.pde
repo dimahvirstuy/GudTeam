@@ -308,7 +308,7 @@ public class QuadTree {
             // Don't collide with self
             if (child == avoidObj) continue;
 
-            if ( isColliding( checkRect, child ) ) {
+            if ( isRectColliding( checkRect, child ) ) {
                 updateList.add(child);
             }
         }
@@ -331,8 +331,14 @@ public class QuadTree {
         */
     }
 
+    // Checks strictly collisions between 2 objects
+    public boolean doObjectsCollide(GameObjectPhysics obj1, GameObjectPhysics obj2, float offsetX, float offsetY) {
+        Rectangle checkRect = obj1.getActualCollisionBox(offsetX, offsetY);
+        return isRectColliding(checkRect, obj2);
+    }
+
     // Returns whether a rect collides with another objet
-    private boolean isColliding(Rectangle check, GameObjectPhysics obj) {
+    public boolean isRectColliding(Rectangle check, GameObjectPhysics obj) {
         //Rectangle objRect = new Rectangle(obj.collisionBox.width, obj.collisionBox.height);
         //objRect.x += obj.x;
         //objRect.y += obj.y;
