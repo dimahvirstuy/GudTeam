@@ -146,7 +146,7 @@ public class QuadTree {
         boolean leftQuadrant = (check.x < midX && check.x + check.width < midX);
         // If the check Rectangle fits within right quadrants
         boolean rightQuadrant = (check.x >= midX);
-
+-
         if (leftQuadrant) {
             if (topQuadrant) {
                 return 1; 
@@ -244,12 +244,22 @@ public class QuadTree {
         }
     }*/
 
-    // Public method to get all objects colliding with a given object and its offset
+    // Wrapper: Only give an object and get collisions with it
     public LinkedList<GameObjectPhysics> getCollisions(GameObjectPhysics obj, float offsetX, float offsetY) {
-        Rectangle checkRect = obj.getActualCollisionBox(offsetX, offsetY);
+        return getCollisions( obj.getActualCollisionBox(offsetX, offsetY), obj);
+    }
+
+    // Wrapper: Only give a rectanlge and get all objects colliding with it
+    public LinkedList<GameObjectPhysics> getCollisions(Rectangle checkRect) {
+        return getCollisions( checkRect, null);
+    }
+
+    // Public method to get all objects colliding with a given rect and its offset, ignoring a given object
+    public LinkedList<GameObjectPhysics> getCollisions(Rectangle checkRect, GameObjectPhysics ignoreObj) {
+        //Rectangle checkRect = obj.getActualCollisionBox(offsetX, offsetY);
 
         LinkedList<GameObjectPhysics> result = new LinkedList<GameObjectPhysics>();
-        updateObjectCollisions(result, obj, checkRect);
+        updateObjectCollisions(result, ignoreObj, checkRect);
         return result;
     }
 

@@ -18,7 +18,7 @@ public class Main {
     public void initialize() {
         Player player = new Player(0,0);
         handler.addObject( player );
-        //handler.player = player; // for ease of access
+        handler.player = player; // for ease of access
 
         //camera.viewWidth *= 2;
         //-camera.viewHeight *= 2;
@@ -32,6 +32,10 @@ public class Main {
             /*for(float yy = 0; yy < PORT_HEIGHT; yy+=15f) {
                 handler.addObject( new CollisionTest(xx, yy) );
             }*/
+        }
+        
+        for(int i = 0; i < 30; i++) {
+            handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, PERSON_COLOR.RED) );
         }
 
         handler.addObject( new CollisionTest(16, 200 - 16) );
@@ -48,8 +52,9 @@ public class Main {
 
         background(0);
 
+        colorMode(RGB);
         stroke(color(255,255,255));
-        fill(color(0,0,0));
+        fill(color(150,150,150));
         // draw tiles
         int d = 128;
         for(int xx = d * ((int) (camera.xPos / d) - 1); xx < camera.xPos + camera.viewWidth + d; xx+=d) {

@@ -137,9 +137,18 @@ public class GameObjectHandler {
         return objectsByTag.get(index);
     }
 
-    // Collision function wrapper
+    // Collision function wrapper. Give rect and ignore object and offset, get all collisions with that rectangle excluding the ignoreObject
+    public LinkedList<GameObjectPhysics> getCollisions(Rectangle checkRect, GameObjectPhysics ignoreObj) {
+        return collisionTree.getCollisions( checkRect, ignoreObj);
+    }
+
     public LinkedList<GameObjectPhysics> getCollisions(GameObjectPhysics obj, float offsetX, float offsetY) {
         return collisionTree.getCollisions( obj, offsetX, offsetY );
+    }
+
+    // Collision function wrapper. Give a rectanlge and get all objects colliding with it
+    public LinkedList<GameObjectPhysics> getCollisions(Rectangle checkRect) {
+        return collisionTree.getCollisions( checkRect );
     }
 
     // isColliding function wrapper
