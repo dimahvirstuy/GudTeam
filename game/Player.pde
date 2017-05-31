@@ -101,8 +101,7 @@ public class Player extends GameObjectPhysics {
         // Move
         velX += axisFront * frontPower * Math.cos(destAngle);
         velY += axisFront * frontPower * Math.sin(destAngle);
-        
-        
+
         /// Get collisions with people
         // Collide methods:
         // Add to stack if person is NEXT to or BEHIND the car
@@ -114,11 +113,15 @@ public class Player extends GameObjectPhysics {
             // Only do stuff if we have a person object
             if (current instanceof Person) {
                 Person person = (Person) current;
-                double personAngle = Math.atan2(person.y - y, person.x - x); // angle to player"'.;/":?"h
+                double personAngle = Math.atan2(person.y - y, person.x - x) + dAngle; // angle to player"'.;/":?"h
                 double delta = Math.abs(MathUtil.getAngleDifference(personAngle, image_angle + dAngle));
-                System.out.println( (180/Math.PI) * personAngle + " , " + (180/Math.PI) * delta );
+                System.out.println( (180/Math.PI) * delta );
                 // IF WE'RE WITHIN RANGE to kill the player
-                if ( (velMagnitude > 3) && (delta < Math.PI / 8.0 || delta > Math.PI * (5.0/6.0)) ) {
+
+                double killThreshold = (Math.PI / 6.0) * 2.0 * (velMagnitude / maxSpeed);
+                System.out.println("Speed: " + velMagnitude + ", Threshold: " + (killThreshold * (180 / Math.PI)) );
+
+                if ( (velMagnitude > 1) && (delta < killThreshold || delta > Math.PI * (5.0/6.0)) ) {
                     person.die();
                 } else {
                     stack_TM.add(person.pickUp());
