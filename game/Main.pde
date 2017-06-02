@@ -35,11 +35,13 @@ public class Main {
         }
         
         for(int i = 0; i < 30; i++) {
-            handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, PERSON_COLOR.RED) );
+            handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, PERSON_COLOR.BLUE) );
         }
 
         handler.addObject( new CollisionTest(16, 200 - 16) );
         handler.addObject( new CollisionTest(64 - 16, 200 - 16) );
+        
+        handler.addObject( new DropOffZone( -100, -100, 50, 50, PERSON_COLOR.RED ) );
 
         lastTime = System.nanoTime();
     }

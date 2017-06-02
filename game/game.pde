@@ -11,6 +11,7 @@ Camera camera;
 GameObjectHandler handler;
 Resources resources;
 
+
 final int PORT_WIDTH = 1024;
 final int PORT_HEIGHT = PORT_WIDTH * 3/4;
 

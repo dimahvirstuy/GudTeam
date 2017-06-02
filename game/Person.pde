@@ -10,10 +10,12 @@ public static enum PERSON_COLOR {
 public class Person extends GameObjectPhysics {
 
     PERSON_COLOR col;
-    private boolean isDroppedOff = false;
 
     public Person(float x, float y, PERSON_COLOR col) {
-        super(x, y, null); // TODO: Insert image
+        super(x, y, resources.SPR_PERSON);
+        animator.animationSpeed = 0;
+        animator.currentIndex = col.ordinal(); // We assume the spritesheet is arranged correctly
+
         this.col = col;
 
         collideWithOthers = true;
@@ -25,7 +27,7 @@ public class Person extends GameObjectPhysics {
     }
 
     // TODO: Replace with image
-    private color getCol(PERSON_COLOR col) {
+    public color getCol() {
         switch (col) {
             case RED:
                 return color(255, 0, 0);
@@ -44,7 +46,8 @@ public class Person extends GameObjectPhysics {
     @Override
     public void render() {
         // super.render(); <---- FOR ACTUAL IMAGE
-        color( getCol(col) );
+        colorMode(RGB);
+        fill( getCol() );
         rect(x - 4, y - 16, 8, 16);
         double theta = Math.atan2( (y - handler.player.y),  (x - handler.player.x) );
         double delta = MathUtil.getAngleDifference(handler.player.image_angle, theta);
@@ -71,7 +74,7 @@ public class Person extends GameObjectPhysics {
     }
 
     // Get dropped off by a car
-    public void dropOff(float x, float y) {
+    public void dropOff() {
         
     }
 

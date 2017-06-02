@@ -3,7 +3,7 @@
  * Vroom Vroom
  ************/
 
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class Player extends GameObjectPhysics {
 
@@ -18,8 +18,11 @@ public class Player extends GameObjectPhysics {
     private float maxSpeed = 10f;
     private boolean inControl = true; // Whether car is in "control" (otherwise it's in "initial D drift" mode)
 
-    private Stack<Person> stack_TM; // Holds the people
+    private LinkedList<Person> ppl; // Holds the people
     // There's yo stack ^^^^^^^^^
+    private float funEffect = 0.0f; // fun *Slide in* effect for grabbing people
+
+    private ParticleSystem tireParticles;
 
     public Player(float x, float y) {
         super(x, y, resources.SPR_CAR);
@@ -29,17 +32,43 @@ public class Player extends GameObjectPhysics {
         image_xoffset = 16;
         image_yoffset = 8;
 
-        stack_TM = new Stack<Person>();
+        ppl = new LinkedList<Person>();
+
+        tireParticles = new ParticleSystem();
+        tireParticles.emissionRate = 1.0f;
+        tireParticles.decayRate = 30f;
+        tireParticles.particleTexture = resources.SPR_TIRES;
+        tireParticles.particleXoffset = image_xoffset;
+        tireParticles.particleYoffset = image_yoffset;
+        tireParticles.particleDrawOrder = drawOrder - 1;
+    }
+
+    // Drops off all people on top of list with same color
+    public void dropOff ( PERSON_COLOR col ) {
+        ListIterator<Person> iter = ppl.listIterator();
+        while( iter.hasNext() ) {
+            Person person = iter.next();
+            // If not same color, stop.
+            if (person.col != col) break;
+            
+            person.dropOff();
+            iter.remove();
+        }
     }
 
     @Override
     public void update() {
         super.update();
+        tireParticles.active = !inControl;
+        tireParticles.x = x;
+        tireParticles.y = y;
+        tireParticles.particleAngle = image_angle;
+        tireParticles.update();
         
+
         double velMagnitude = Math.sqrt( velX * velX + velY * velY );
         // clamp to max speed
         velMagnitude = (velMagnitude > maxSpeed) ? maxSpeed : velMagnitude;
-
 
         // Follow player
         camera.xPos = x - camera.viewWidth / 2;
@@ -124,11 +153,33 @@ public class Player extends GameObjectPhysics {
                 if ( (velMagnitude > 1) && (delta < killThreshold || delta > Math.PI * (5.0/6.0)) ) {
                     person.die();
                 } else {
-                    stack_TM.add(person.pickUp());
+                    ppl.add(person.pickUp());
+                    funEffect = 0f;
                 }
             }
         }
+    }
 
-
+    @Override
+    public void renderGUI() {
+        //rect(0, 0, 25, 25);
+        //fill( color( 0, 0, 0) );
+        //text( Integer.toString(ppl.size()), 15, 15);
+        Iterator<Person> iter = ppl.iterator();
+        float dy = 100;
+        float dx = 10f;
+        while(iter.hasNext()) {
+            Person person = iter.next();
+            //image( person.animator.currentFrame(), 10, dy );
+            if ( iter.hasNext() ) {
+                dx = 10f;
+            } else {
+                dx = funEffect;
+                funEffect += 0.1f *(10f - funEffect);
+            }
+            fill( person.getCol() );
+            rect( dx, dy, 8, 8);
+            dy+= 64;
+        }
     }
 }

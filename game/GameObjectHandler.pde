@@ -7,6 +7,7 @@
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Comparator;
 
 public class GameObjectHandler {
     // Linked list because
@@ -14,6 +15,8 @@ public class GameObjectHandler {
     // (ArrayList gives no advantage for iterating
     // but is worse for adding)
     private LinkedList<GameObject> objects;
+
+    private ListIterator<GameObject> masterIterator;
 
     // Maps object class to linkedlists of gameObjects
     private HashMap<Class, LinkedList<GameObject>> objectsByClass;
@@ -40,7 +43,10 @@ public class GameObjectHandler {
     }
 
     public void addObject(GameObject obj) {
-        objects.add(obj);
+        if (masterIterator == null)
+            objects.add(obj);
+        else
+            masterIterator.add(obj);
     }
 
     // Master tick, goes through all obects
@@ -49,8 +55,6 @@ public class GameObjectHandler {
 
         HashMap<Class, LinkedList<GameObject>> newObjectsByClass = null;
         ArrayList<LinkedList<GameObject>> newObjectsByTag = null;
-
-
 
         // Create empty containers
         newObjectsByClass = new HashMap<Class, LinkedList<GameObject>>();
@@ -66,6 +70,8 @@ public class GameObjectHandler {
         // Reset collision quadtree
         collisionTree.clear();
 
+        objects.sort( new DrawOrderComparator() );
+
         // Loop through once to add objects to collision tree
         for( GameObject obj : objects ) {
             if (obj instanceof GameObjectPhysics) {
@@ -78,13 +84,13 @@ public class GameObjectHandler {
             }
         }
 
-        ListIterator<GameObject> iter = objects.listIterator();
-        while(iter.hasNext()) {
-           GameObject obj = iter.next();
+        masterIterator = objects.listIterator();
+        while(masterIterator.hasNext()) {
+           GameObject obj = masterIterator.next();
            // If should destroy, destroy
            // and skip this one
            if (obj.shouldDestroy()) {
-               iter.remove();
+               masterIterator.remove();
                continue;
            }
            if (update) {
@@ -101,7 +107,15 @@ public class GameObjectHandler {
                    newObjectsByTag.set( tag, new LinkedList<GameObject>() );
                }
                newObjectsByTag.get(tag).add(obj);
-              
+
+              if (render) {
+                   /// Translate for gui
+                   pushMatrix();
+                   translate(camera.xPos, camera.yPos);
+                   scale( camera.viewWidth / PORT_WIDTH, camera.viewHeight / PORT_HEIGHT );
+                   obj.renderGUI();
+                   popMatrix();
+              }
                // ALso update
                obj.update();
            }
@@ -156,8 +170,21 @@ public class GameObjectHandler {
         return collisionTree.isColliding( obj, offsetX, offsetY, type );
     }
 
+    // Collision function wrapper. Do the two objects collide with each other?
+    public boolean doObjectsCollide(GameObjectPhysics obj1, GameObjectPhysics obj2, float offsetX, float offsetY) {
+        return collisionTree.doObjectsCollide( obj1, obj2, offsetX, offsetY );
+    }
+
+
     // Get total number of objects
     public int getObjectCount() {
         return objects.size();
+    }
+
+    // Comparator class used to compare objects based on their draw order / depth.
+    private class DrawOrderComparator implements Comparator<GameObject> {
+        public int compare( GameObject obj1, GameObject obj2) {
+            return (int)Math.signum( obj1.drawOrder - obj2.drawOrder ); 
+        }
     }
 }

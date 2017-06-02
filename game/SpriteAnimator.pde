@@ -8,7 +8,7 @@ public class SpriteAnimator {
     public float animationSpeed = 1.0;
 
     private Texture texture;
-    private float currentIndex = 0.0;
+    public float currentIndex = 0.0;
 
     public SpriteAnimator(Texture texture) {
         this.texture = texture;

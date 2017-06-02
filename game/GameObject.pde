@@ -26,12 +26,14 @@ public abstract class GameObject {
     private Texture sprite;
     protected SpriteAnimator animator;
 
+    public float drawOrder; // What order is this drawn?
+
     protected float image_xscale = 1.0f;
     protected float image_yscale = 1.0f;
     protected float image_xoffset = 0.0f;
     protected float image_yoffset = 0.0f;
 
-    float image_angle = 0.0f;
+    public float image_angle = 0.0f;
 
     public GameObject(float x, float y, Texture sprite) {
        this.x = x;
@@ -56,6 +58,11 @@ public abstract class GameObject {
         popMatrix();
     }
 
+    // draws GUI (no view transformations needed)
+    public void renderGUI() {
+        
+    }
+
     // Mark object to destroy before next tick
     public void destroy() {
         destroy = true;
@@ -74,4 +81,5 @@ public abstract class GameObject {
         sprite = texture;
         animator.texture = texture;
     }
+
 }
