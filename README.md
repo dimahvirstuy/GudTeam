@@ -21,7 +21,7 @@ and
 - Driving and Drifting physics
 - An immersive open world (to be built)
 - High-paced pickup and dropoff (to be built)
-- A  **S T A C K (TM)**  that holds people
+- A  **Q U E U E (TM)**  that holds people
 
 
 ### _Special Project Specifications_
