@@ -20,6 +20,10 @@ public class Main {
         handler.addObject( player );
         handler.player = player; // for ease of access
 
+        Gamestate gamestate = new Gamestate();
+        handler.addObject( gamestate );
+        handler.gamestate = gamestate;
+
         //camera.viewWidth *= 2;
         //-camera.viewHeight *= 2;
 
@@ -33,7 +37,7 @@ public class Main {
                 handler.addObject( new CollisionTest(xx, yy) );
             }*/
         }
-        
+
         for(int i = 0; i < 30; i++) {
             handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, PERSON_COLOR.BLUE) );
         }

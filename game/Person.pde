@@ -51,13 +51,13 @@ public class Person extends GameObjectPhysics {
         super.render();
         //fill( getCol() );
         //rect(x - 4, y - 16, 8, 16);
-        double theta = Math.atan2( (y - handler.player.y),  (x - handler.player.x) );
+        /*DEBUG: double theta = Math.atan2( (y - handler.player.y),  (x - handler.player.x) );
         double delta = MathUtil.getAngleDifference(handler.player.image_angle, theta);
         theta *= (180 / Math.PI); // rad to deg
         delta *= (180 / Math.PI); // rad to deg
         text( Double.toString(theta), x - 10, y + 10 );
         text( Double.toString(delta), x - 10, y + 22 );
-        
+        */
     }
 
     // Get run over by a car

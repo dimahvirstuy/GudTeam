@@ -49,13 +49,15 @@ public abstract class GameObject {
 
     // All rendering is done here
     public void render() {
-        pushMatrix();
-        translate(x, y);
-        rotate(image_angle);
-        scale( image_xscale, image_yscale );
-        translate(-image_xoffset, -image_yoffset);
-        image( animator.currentFrame() , 0, 0 );
-        popMatrix();
+        if (sprite != null) {
+            pushMatrix();
+            translate(x, y);
+            rotate(image_angle);
+            scale( image_xscale, image_yscale );
+            translate(-image_xoffset, -image_yoffset);
+            image( animator.currentFrame() , 0, 0 );
+            popMatrix();
+        }
     }
 
     // draws GUI (no view transformations needed)

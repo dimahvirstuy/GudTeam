@@ -153,8 +153,10 @@ public class Player extends GameObjectPhysics {
 
                 if ( (velMagnitude > 1) && (delta < killThreshold || delta > Math.PI * (5.0/6.0)) ) {
                     person.die();
+                    handler.gamestate.loseTime(1);
                 } else {
                     ppl.add(person.pickUp());
+                    handler.gamestate.bonusTime(7);
                     funEffectBump = 1.0f;
                     funEffect = 0f;
                 }

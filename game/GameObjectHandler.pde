@@ -30,6 +30,7 @@ public class GameObjectHandler {
 
     // For ease of access
     public Player player;
+    public Gamestate gamestate;
 
     public GameObjectHandler() {
         objects = new LinkedList<GameObject>();
