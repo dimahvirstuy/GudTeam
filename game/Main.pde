@@ -41,7 +41,7 @@ public class Main {
         handler.addObject( new CollisionTest(16, 200 - 16) );
         handler.addObject( new CollisionTest(64 - 16, 200 - 16) );
         
-        handler.addObject( new DropOffZone( -100, -100, 50, 50, PERSON_COLOR.RED ) );
+        handler.addObject( new DropOffZone( -100, -100, 50, 50, PERSON_COLOR.BLUE ) );
 
         lastTime = System.nanoTime();
     }

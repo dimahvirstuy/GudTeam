@@ -79,7 +79,7 @@ public abstract class GameObject {
 
     public void setTexture(Texture texture) {
         sprite = texture;
-        animator.texture = texture;
+        animator.setTexture(texture);
     }
 
 }

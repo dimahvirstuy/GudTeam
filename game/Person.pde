@@ -4,7 +4,7 @@
  ************/
 
 public static enum PERSON_COLOR {
-    RED, GREEN, BLUE
+    RED, BLUE, YELLOW
 }
 
 public class Person extends GameObjectPhysics {
@@ -12,11 +12,13 @@ public class Person extends GameObjectPhysics {
     PERSON_COLOR col;
 
     public Person(float x, float y, PERSON_COLOR col) {
-        super(x, y, resources.SPR_PERSON);
+        super(x, y, resources.SPR_PERSON_RED);
+        this.col = col;
+
+        //setTexture( getColorTexture() );
+
         animator.animationSpeed = 0;
         animator.currentIndex = col.ordinal(); // We assume the spritesheet is arranged correctly
-
-        this.col = col;
 
         collideWithOthers = true;
 
@@ -27,28 +29,28 @@ public class Person extends GameObjectPhysics {
     }
 
     // TODO: Replace with image
-    public color getCol() {
+    public Texture getColorTexture() {
         switch (col) {
             case RED:
-                return color(255, 0, 0);
-            case GREEN:
-                return color(0, 255, 0);
+                return resources.SPR_PERSON_RED;
             case BLUE:
-                return color(0, 0, 255);
-            default: // default is white
-                return color(255,255,255);
+                return resources.SPR_PERSON_BLUE;
+            case YELLOW:
+                return resources.SPR_PERSON_YELLOW;
+            default: 
+                return null;
         }
     }
 
-    public void update() {
-    }
+    /*public void update() {
+        super.update();
+    }*/
 
     @Override
     public void render() {
-        // super.render(); <---- FOR ACTUAL IMAGE
-        colorMode(RGB);
-        fill( getCol() );
-        rect(x - 4, y - 16, 8, 16);
+        super.render();
+        //fill( getCol() );
+        //rect(x - 4, y - 16, 8, 16);
         double theta = Math.atan2( (y - handler.player.y),  (x - handler.player.x) );
         double delta = MathUtil.getAngleDifference(handler.player.image_angle, theta);
         theta *= (180 / Math.PI); // rad to deg

@@ -21,6 +21,7 @@ public class Player extends GameObjectPhysics {
     private LinkedList<Person> ppl; // Holds the people
     // There's yo stack ^^^^^^^^^
     private float funEffect = 0.0f; // fun *Slide in* effect for grabbing people
+    private float funEffectBump = 0.0f;
 
     private ParticleSystem tireParticles;
 
@@ -154,10 +155,15 @@ public class Player extends GameObjectPhysics {
                     person.die();
                 } else {
                     ppl.add(person.pickUp());
+                    funEffectBump = 1.0f;
                     funEffect = 0f;
                 }
             }
         }
+
+        funEffectBump *= 0.8f;
+        image_xscale = -1 * (1f + funEffectBump);
+        image_yscale = 1f + funEffectBump;
     }
 
     @Override
@@ -177,8 +183,9 @@ public class Player extends GameObjectPhysics {
                 dx = funEffect;
                 funEffect += 0.1f *(10f - funEffect);
             }
-            fill( person.getCol() );
-            rect( dx, dy, 8, 8);
+            image( person.animator.currentFrame() , dx, dy );
+            //fill( person.getCol() );
+            //rect( dx, dy, 8, 8);
             dy+= 64;
         }
     }
