@@ -12,7 +12,7 @@ public class Player extends GameObjectPhysics {
 
     private float frontPower = 0.21f; // acceleration power (gas pedal)
     private float turnAngle = 40; // degrees
-    private float rotatePower = 0.016f; // how fast we rotate
+    private float rotatePower = 0.024f;//0.016f; // how fast we rotate
     private float breakPower = 0.06f;
 
     private float maxSpeed = 10f;
@@ -21,6 +21,8 @@ public class Player extends GameObjectPhysics {
     private LinkedList<Person> ppl; // Holds the people
     // There's yo stack ^^^^^^^^^
     private float funEffect = 0.0f; // fun *Slide in* effect for grabbing people
+    private float funEffectHeight = 0.0f;// height of people (falling)
+    private float funEffectHeightVel = 0.0f;
     private float funEffectBump = 0.0f;
 
     private ParticleSystem tireParticles;
@@ -37,7 +39,7 @@ public class Player extends GameObjectPhysics {
 
         tireParticles = new ParticleSystem();
         tireParticles.emissionRate = 1.0f;
-        tireParticles.decayRate = 30f;
+        tireParticles.decayRate = 1000f;
         tireParticles.particleTexture = resources.SPR_TIRES;
         tireParticles.particleXoffset = image_xoffset;
         tireParticles.particleYoffset = image_yoffset;
@@ -45,15 +47,29 @@ public class Player extends GameObjectPhysics {
     }
 
     // Drops off all people on top of list with same color
-    public void dropOff ( PERSON_COLOR col ) {
+    public void ":""?":?
+    "?';/"?:":?>"::"":?":?">:{?"":?"":?":?iim"??">:i":?
+    :?{
+      ":{?
+      "?:"":?":>?
+      "??:?>":/.;?":> ( PERSON_COLOR col ) {
+        int found = 0;
+
         ListIterator<Person> iter = ppl.listIterator();
         while( iter.hasNext() ) {
             Person person = iter.next();
             // If not same color, stop.
             if (person.col != col) break;
-            
+
             person.dropOff();
             iter.remove();
+            found++;
+        }
+
+        // reset timer if we have at least one person
+        if (found != 0) {
+            handler.gamestate.setTime(15);
+            handler.gamestate.addScore( 200 * found, found );
         }
     }
 
@@ -146,9 +162,9 @@ public class Player extends GameObjectPhysics {
                 double personAngle = Math.atan2(person.y - y, person.x - x) + dAngle; // angle to player"'.;/":?"h
                 double delta = Math.abs(MathUtil.getAngleDifference(personAngle, image_angle + dAngle));
                 System.out.println( (180/Math.PI) * delta );
-                // IF WE'RE WITHIN RANGE to kill the player
 
-                double killThreshold = (Math.PI / 6.0) * 2.0 * (velMagnitude / maxSpeed);
+                // IF WE'RE WITHIN RANGE to kill the player
+                double killThreshold = (Math.PI / 200.0) * 2.0 * (velMagnitude / maxSpeed);
                 System.out.println("Speed: " + velMagnitude + ", Threshold: " + (killThreshold * (180 / Math.PI)) );
 
                 if ( (velMagnitude > 1) && (delta < killThreshold || delta > Math.PI * (5.0/6.0)) ) {
@@ -156,7 +172,6 @@ public class Player extends GameObjectPhysics {
                     handler.gamestate.loseTime(1);
                 } else {
                     ppl.add(person.pickUp());
-                    handler.gamestate.bonusTime(7);
                     funEffectBump = 1.0f;
                     funEffect = 0f;
                 }
@@ -164,6 +179,8 @@ public class Player extends GameObjectPhysics {
         }
 
         funEffectBump *= 0.8f;
+        funEffectHeight -= funEffectHeightVel;
+        funEffectHeightVel -= 0.1f;
         image_xscale = -1 * (1f + funEffectBump);
         image_yscale = 1f + funEffectBump;
     }

@@ -39,13 +39,29 @@ public class Main {
         }
 
         for(int i = 0; i < 30; i++) {
-            handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, PERSON_COLOR.BLUE) );
+            int rand = (int) (Math.random() * 3);
+            PERSON_COLOR col;
+            switch (rand) {
+                case 0:
+                    col = PERSON_COLOR.BLUE;
+                    break;
+                case 1:
+                    col = PERSON_COLOR.RED;
+                    break;
+                case 2:
+                default:
+                    col = PERSON_COLOR.YELLOW;
+                    break;
+            }
+            handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, col) );
         }
 
         handler.addObject( new CollisionTest(16, 200 - 16) );
         handler.addObject( new CollisionTest(64 - 16, 200 - 16) );
-        
-        handler.addObject( new DropOffZone( -100, -100, 50, 50, PERSON_COLOR.BLUE ) );
+
+        handler.addObject( new DropOffZone( -100, -100, 50, 50, PERSON_COLOR.RED ) );
+        handler.addObject( new DropOffZone( -100, 100, 50, 50, PERSON_COLOR.BLUE ) );
+        handler.addObject( new DropOffZone( -100, 300, 50, 50, PERSON_COLOR.YELLOW ) );
 
         lastTime = System.nanoTime();
     }

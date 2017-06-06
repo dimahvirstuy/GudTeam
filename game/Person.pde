@@ -15,7 +15,7 @@ public class Person extends GameObjectPhysics {
         super(x, y, resources.SPR_PERSON_RED);
         this.col = col;
 
-        //setTexture( getColorTexture() );
+        setTexture( getColorTexture() );
 
         animator.animationSpeed = 0;
         animator.currentIndex = col.ordinal(); // We assume the spritesheet is arranged correctly
@@ -23,7 +23,7 @@ public class Person extends GameObjectPhysics {
         collideWithOthers = true;
 
         int buffer = 5;
-        collisionBox = new Rectangle(-4 - buffer,-8 - buffer, 8 + 2*buffer, 16 + 2*buffer);
+        collisionBox = new Rectangle(-8 - buffer,-16 - buffer, 16 + 2*buffer, 32 + 2*buffer);
         image_xoffset = -4;
         image_yoffset = -16;
     }

@@ -15,6 +15,11 @@ public class Gamestate extends GameObject {
     private String hoverText = "";
     private color COLOR_BONUS, COLOR_BAD;
 
+    private int score = 0;
+    private String hoverTextScore = "";
+    private float hoverTextScoreHeight;
+    private color hoverTextScoreColor;
+
     public Gamestate() {
         super(0,0,null);
         colorMode( RGB );
@@ -26,9 +31,14 @@ public class Gamestate extends GameObject {
     public void update() {
         masterTimer -= timerDecayRate;
         hoverTextHeight -= 0.02f;
+        hoverTextScoreHeight -= 0.02f;
         if (hoverTextHeight < 0) hoverTextHeight = 0;
+        if (hoverTextScoreHeight < 0) {
+            hoverTextScoreHeight = 0;
+            hoverTextScore = "";
+        }
     }
-    
+
     public void bonusTime( int ammount ) {
         masterTimer += ammount;
         hoverText = "+" + ammount;
@@ -43,6 +53,24 @@ public class Gamestate extends GameObject {
         hoverTextColor = COLOR_BAD;
     }
 
+    public void setTime( int time ) {
+        masterTimer = time;
+        hoverText = "reset!";
+        hoverTextHeight = 1f;
+        hoverTextColor = COLOR_BONUS;        
+    }
+
+    public void addScore( int ammount, int multiplier ) {
+        score += ammount;
+        if (multiplier > 1) {
+            hoverTextScore = "x" + multiplier + "! + " + ammount;
+        } else {
+            hoverTextScore = "+ " + ammount;
+        }
+        hoverTextScoreHeight = 1f;
+        hoverTextScoreColor = COLOR_BONUS;
+    }
+
     @Override
     public void renderGUI() {
         colorMode( RGB );
@@ -53,5 +81,12 @@ public class Gamestate extends GameObject {
         textSize(45 * hoverTextHeight + 1);
         fill( hoverTextColor );
         text( hoverText, PORT_WIDTH / 2 + 16, 40 + 80*hoverTextHeight);
+
+        fill( color(255, 0, 255) );
+        textSize( 20 );
+        text( "Score: " + Integer.toString( score ), PORT_WIDTH - 128, 60);
+        fill( hoverTextScoreColor );
+        text( hoverTextScore, PORT_WIDTH - 128, 60 + 90*hoverTextScoreHeight);
+        
     }
 }
