@@ -3,8 +3,6 @@
 
 # YELLOW CAR, *the game*
 
-*(Title TBD)*
-
 #### Drive around in a taxi cab, collecting passengers and doing so as fast as possible, without killing them!
 
 
