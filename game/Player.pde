@@ -47,12 +47,7 @@ public class Player extends GameObjectPhysics {
     }
 
     // Drops off all people on top of list with same color
-    public void ":""?":?
-    "?';/"?:":?>"::"":?":?">:{?"":?"":?":?iim"??">:i":?
-    :?{
-      ":{?
-      "?:"":?":>?
-      "??:?>":/.;?":> ( PERSON_COLOR col ) {
+    public void dropOff ( PERSON_COLOR col ) {
         int found = 0;
 
         ListIterator<Person> iter = ppl.listIterator();
