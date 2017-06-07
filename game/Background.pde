@@ -5,7 +5,7 @@
 
 public class Background {
     private PImage[][] grid;
-    
+
     private int imWidth = 128;
     private int imHeight = 128;
 

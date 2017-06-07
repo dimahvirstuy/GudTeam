@@ -115,8 +115,9 @@ public class Gamestate extends GameObject {
             text( gameOverText, PORT_WIDTH / 2 - textWidth(gameOverText) / 2, PORT_HEIGHT/2 + (float) (24*Math.sin(millis() * 0.001) ));
             textSize(60);
             fill( color( 20, 20, 20) );
-            text("FINAL SCORE: " + Integer.toString(score), PORT_WIDTH/2 - 12, PORT_HEIGHT/2 + 80);
-            text("Press Space to try again", PORT_WIDTH/2 - 12, PORT_HEIGHT/2 + 200);
+            text("FINAL SCORE: " + Integer.toString(score), PORT_WIDTH/2 - 2, PORT_HEIGHT/2 + 80);
+            textSize(30);
+            text("Press Space to try again", PORT_WIDTH/2 - 200, PORT_HEIGHT/2 + 200);
             if (Input.keyPress((int)' ')) {
                 gameOver = false;
                 setTime(15);

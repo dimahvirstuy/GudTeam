@@ -86,6 +86,25 @@ public class Player extends GameObjectPhysics {
     @Override
     public void update() {
         super.update();
+        
+        
+        //SIDE MAP COLLISIONS: IT'S 3 AM
+        if (x < 0) {
+            x = 0;
+            velX = 0;
+        } else if (x > 2048) {
+            x = 2048;
+            velX = 0;
+        }
+        if (y < 0) {
+            y = 0;
+            velY = 0;
+        } else if (y > 2048) {
+            y = 2048;
+            velY = 0;
+        }
+        
+        
         tireParticles.active = !inControl;
         tireParticles.x = x;
         tireParticles.y = y;
