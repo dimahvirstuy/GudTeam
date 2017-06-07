@@ -34,4 +34,4 @@ including collision detection.
 2. cd into game: `cd game/`
 3. open the `game.pde` file inside the `game/` directory with processing: `processing game.pde`
 4. Run (press the button in the upper left corner that looks like a triangle)
-5. Enjoy
+5. Enjoy (Only if you want to)
