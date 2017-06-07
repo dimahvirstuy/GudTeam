@@ -9,6 +9,8 @@ public class Gamestate extends GameObject {
     private float masterTimer = 15f; // if this thing hits zero, we dead
     private float timerDecayRate = 1f/60f; // how fast the thing ticks down
 
+    private boolean dead, gameOver; // Are we dead? Are we having a GameOver Screen/
+
     // Hover text: +5, -10, "BONUS +5!" ect..
     private float hoverTextHeight;
     private color hoverTextColor;
@@ -30,12 +32,25 @@ public class Gamestate extends GameObject {
     @Override
     public void update() {
         masterTimer -= timerDecayRate;
+        if (masterTimer < 0) {
+            masterTimer = 0;
+            if (!dead) {
+                dead = true;
+                handler.player.frontPower = 0f;
+            }
+        }
         hoverTextHeight -= 0.02f;
         hoverTextScoreHeight -= 0.02f;
         if (hoverTextHeight < 0) hoverTextHeight = 0;
         if (hoverTextScoreHeight < 0) {
             hoverTextScoreHeight = 0;
             hoverTextScore = "";
+        }
+        
+        if (dead) {
+            if (Math.abs(handler.player.velX) < 0.1 && Math.abs(handler.player.velY) < 0.1) {
+                gameOver = true;
+            }
         }
     }
 
@@ -87,6 +102,13 @@ public class Gamestate extends GameObject {
         text( "Score: " + Integer.toString( score ), PORT_WIDTH - 128, 60);
         fill( hoverTextScoreColor );
         text( hoverTextScore, PORT_WIDTH - 128, 60 + 90*hoverTextScoreHeight);
+        
+        if (gameOver) {
+            String gameOverText = "Game Over";
+            textSize(80);
+            fill( color( 255, 190, 0) );
+            text( gameOverText, PORT_WIDTH / 2 - textWidth(gameOverText) / 2, PORT_HEIGHT/2 + (float) (24*Math.sin(millis() * 0.001) ));
+        }
         
     }
 }
