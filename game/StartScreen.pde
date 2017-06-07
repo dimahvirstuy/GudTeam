@@ -7,7 +7,7 @@ public class StartScreen {
     private float slideIn = 1.0f; // Title Slidein
     private boolean openMenu = false;
     private float xOffset = 600f;
-    private float dXpos = 0;
+    private float dXpos = 2000;
     public boolean startGame = false;
 
     public void update() {
