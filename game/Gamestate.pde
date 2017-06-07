@@ -108,6 +108,9 @@ public class Gamestate extends GameObject {
             textSize(80);
             fill( color( 255, 190, 0) );
             text( gameOverText, PORT_WIDTH / 2 - textWidth(gameOverText) / 2, PORT_HEIGHT/2 + (float) (24*Math.sin(millis() * 0.001) ));
+            textSize(60);
+            fill( color( 20, 20, 20) );
+            text("FINAL SCORE: " + Integer.toString(score), PORT_WIDTH/2 - 128, PORT_HEIGHT/2 + 80);
         }
         
     }
