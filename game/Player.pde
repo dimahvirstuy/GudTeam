@@ -7,10 +7,10 @@ import java.util.LinkedList;
 
 public class Player extends GameObjectPhysics {
 
-    private float sideFriction = 0.2; // Friction on side
+    private float sideFriction = 0.13; // Friction on side
     private float frontFriction = 0.04; // Friction on front of car
 
-    private float frontPower = 0.19f; // acceleration power (gas pedal)
+    private float frontPower = 0.17f; // acceleration power (gas pedal)
     private float turnAngle = 40; // degrees
     private float rotatePower = 0.024f;//0.016f; // how fast we rotate
     private float breakPower = 0.06f;
