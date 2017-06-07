@@ -10,7 +10,7 @@ public class Player extends GameObjectPhysics {
     private float sideFriction = 0.2; // Friction on side
     private float frontFriction = 0.04; // Friction on front of car
 
-    private float frontPower = 0.21f; // acceleration power (gas pedal)
+    private float frontPower = 0.19f; // acceleration power (gas pedal)
     private float turnAngle = 40; // degrees
     private float rotatePower = 0.024f;//0.016f; // how fast we rotate
     private float breakPower = 0.06f;
@@ -64,10 +64,23 @@ public class Player extends GameObjectPhysics {
         // reset timer if we have at least one person
         if (found != 0) {
             handler.gamestate.setTime(15);
-            handler.gamestate.addScore( 200 * found, found );
+            if (found == 1) {
+              handler.gamestate.addScore(200, found);
+            }
+            if (found == 2) {
+              handler.gamestate.addScore(500, found);
+            }
+            if (found == 3) {
+              handler.gamestate.addScore(1000, found);
+            }
+            if (found == 4) {
+              handler.gamestate.addScore(3000, found);
+            }
         }
     }
-
+     public boolean isfull () {
+       return ppl.size() > 3;
+     }
     @Override
     public void update() {
         super.update();
@@ -159,13 +172,18 @@ public class Player extends GameObjectPhysics {
                 System.out.println( (180/Math.PI) * delta );
 
                 // IF WE'RE WITHIN RANGE to kill the player
-                double killThreshold = (Math.PI / 200.0) * 2.0 * (velMagnitude / maxSpeed);
+                double killThreshold = (Math.PI / 10.0) * 2.0 * (velMagnitude / maxSpeed);
                 System.out.println("Speed: " + velMagnitude + ", Threshold: " + (killThreshold * (180 / Math.PI)) );
 
                 if ( (velMagnitude > 1) && (delta < killThreshold || delta > Math.PI * (5.0/6.0)) ) {
                     person.die();
                     handler.gamestate.loseTime(1);
                 } else {
+                  if (isfull()) {
+                    person.die();
+                    handler.gamestate.loseTime(1);
+                    return;
+                  }
                     ppl.add(person.pickUp());
                     funEffectBump = 1.0f;
                     funEffect = 0f;
