@@ -6,6 +6,8 @@
 import java.util.LinkedList;
 
 public class Player extends GameObjectPhysics {
+  
+    private boolean disabled = false; // whether we are in control of acceleration
 
     private float sideFriction = 0.2; // Friction on side
     private float frontFriction = 0.04; // Friction on front of car
@@ -143,6 +145,8 @@ public class Player extends GameObjectPhysics {
         //TODO: we break if we go back and go slower
         int axisSide = (Input.keyPress( RIGHT ) ? 1 : 0) + (Input.keyPress( LEFT ) ? -1 : 0);
         int axisFront = (Input.keyPress( UP ) ? 1 : 0) + (Input.keyPress( DOWN ) ? -1 : 0);
+        
+        if (disabled) axisFront = 0; // if disabled, we cannot accelerate
 
         if (!inControl) axisSide *= 1.6;
 

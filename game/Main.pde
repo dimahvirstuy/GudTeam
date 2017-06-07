@@ -111,10 +111,10 @@ public class Main {
         handler.loopAll(true, true);
         Input.updatePostTick();
 
-        if (!startScreen.startGame) {
+        //if (!startScreen.startGame) {
             startScreen.update();
             startScreen.renderGUI();
-        }
+        //}
 
     }
 }
