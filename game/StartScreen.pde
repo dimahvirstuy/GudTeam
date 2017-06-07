@@ -49,7 +49,7 @@ public class StartScreen {
         fill( color(255, 255, 0) );
         float h = 128;
         text("Yellow ", PORT_WIDTH/2 - textWidth("Yellow ") - PORT_WIDTH*slideIn, h);
-        text("Cab", PORT_WIDTH/2 + PORT_WIDTH*slideIn, h);
+        text("Car", PORT_WIDTH/2 + PORT_WIDTH*slideIn, h);
         if (!startGame && openMenu) {
             int intensity = (int) (100 + 100 * Math.sin(0.005 * millis()));
             fill( color( intensity, intensity, intensity ) );
