@@ -1,11 +1,17 @@
 * DEvLOG
+* AKA our Git commit messages, re-copied over onto one text file
+
 ** 05/18/17
+Adris: Started creating core game engine: Made object handling system
 
 ** 05/19/17
+Adris: Implemented quad tree collision detection
 
 ** 05/20/17
+Adris: Refine quad tree collision detection
 
 ** 05/21/17
+Adris: Create platformer player
 
 ** 05/22/17
 
@@ -16,6 +22,7 @@
 ** 05/25/17
 
 ** 05/26/17
+Adris: Add car that drifts
 
 ** 05/27/17
 
@@ -24,20 +31,25 @@
 ** 05/29/17
 
 ** 05/30/17
+Adris: Fill Readme and add Person Stack
 
 ** 05/31/17
+Adris: Implement person death/pickup
 
 ** 06/01/17
 
 ** 06/02/17
+Adris: Add drop-off zones for people
 
 ** 06/03/17
 
 ** 06/04/17
+Adris: Implement timer and score GUI. Add fun pickup effect
 
 ** 06/05/17
 
 ** 06/06/17
+Adris: Implement start screen, game over mechanism, map loading and 
 
 ** 06/07/17
 
