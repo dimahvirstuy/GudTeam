@@ -6,6 +6,17 @@
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 
+public static class GraphicUtil {
+      public static BufferedImage getSubimage(BufferedImage img, int x, int y, int w, int h) {
+        BufferedImage sub = img.getSubimage(x, y, w, h);
+        BufferedImage result = new BufferedImage(w, h, img.getType());
+        Graphics g = result.getGraphics();
+        g.drawImage(sub, 0, 0, null);
+        g.dispose();
+        return result;
+    }
+}
+
 public class Texture {
 
     private PImage[] frames;
@@ -38,7 +49,7 @@ public class Texture {
             int currentX = cellWidth * (xOffset + i%rowWidth);
             int currentY = cellHeight * (yOffset + (int)(i/rowWidth));
             System.out.println("(" + currentX + ", " + currentY + ")");
-            frames[i] = new PImage(getSubimage(img,currentX, currentY, cellWidth, cellHeight));
+            frames[i] = new PImage(GraphicUtil.getSubimage(img,currentX, currentY, cellWidth, cellHeight));
         }
 
     }
@@ -54,22 +65,6 @@ public class Texture {
 
     public int size() {
         return frames.length;
-    }
-
-    private BufferedImage getSubimage(BufferedImage img, int x, int y, int w, int h) {
-        BufferedImage sub = img.getSubimage(x, y, w, h);
-        BufferedImage result = new BufferedImage(w, h, img.getType());
-        Graphics g = result.getGraphics();
-        g.drawImage(sub, 0, 0, null);
-        g.dispose();
-        return result;
-        /*BufferedImage sub = img.getSubimage(x, y, w, h);
-        return new BufferedImage(
-            sub.getColorModel(),
-            img.copyData(null),
-            sub.getColorModel().isAlphaPremultiplied(),
-            null
-        );*/
     }
 
 }

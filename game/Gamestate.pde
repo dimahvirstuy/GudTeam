@@ -107,15 +107,22 @@ public class Gamestate extends GameObject {
         text( "Score: " + Integer.toString( score ), PORT_WIDTH - 128, 60);
         fill( hoverTextScoreColor );
         text( hoverTextScore, PORT_WIDTH - 128, 60 + 90*hoverTextScoreHeight);
-        
+
         if (gameOver) {
             String gameOverText = "Game Over";
             textSize(80);
-            fill( color( 255, 190, 0) );
+            fill( color( 150, 190, 0) );
             text( gameOverText, PORT_WIDTH / 2 - textWidth(gameOverText) / 2, PORT_HEIGHT/2 + (float) (24*Math.sin(millis() * 0.001) ));
             textSize(60);
             fill( color( 20, 20, 20) );
             text("FINAL SCORE: " + Integer.toString(score), PORT_WIDTH/2 - 12, PORT_HEIGHT/2 + 80);
+            text("Press Space to try again", PORT_WIDTH/2 - 12, PORT_HEIGHT/2 + 200);
+            if (Input.keyPress((int)' ')) {
+                gameOver = false;
+                setTime(15);
+                score = 0;
+                handler.player.velX = 5f;
+            }
         }
         
     }

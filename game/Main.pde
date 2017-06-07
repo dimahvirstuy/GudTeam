@@ -8,6 +8,7 @@ public class Main {
     public GameObjectHandler handler;
 
     private StartScreen startScreen;
+    private Background background;
 
     public float dTime; // delta time. Used for movement
     private long lastTime;
@@ -19,6 +20,7 @@ public class Main {
 
     public void initialize() {
         startScreen = new StartScreen();
+        background = new Background("images/map_sprites/map 16x.png");
         /*Player player = new Player(0,0);
         handler.addObject( player );
         handler.player = player; // for ease of access
@@ -107,6 +109,7 @@ public class Main {
                 rect(xx, yy, d, d);
             } 
         }
+        background.render();
 
         handler.loopAll(true, true);
         Input.updatePostTick();

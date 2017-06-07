@@ -10,8 +10,8 @@ Camera camera;
 GameObjectHandler handler;
 Resources resources;
 
-final int PORT_WIDTH = 1024;
-final int PORT_HEIGHT = PORT_WIDTH * 3/4;
+int PORT_WIDTH = 1024;
+int PORT_HEIGHT = PORT_WIDTH * 3/4;
 
 void setup() {
     // We use surface.setSize(w,h) and not "size(w,h)" because this can accept variables
@@ -19,6 +19,11 @@ void setup() {
     // and refuses to use variables.
     // Screw that I say!
     surface.setSize(PORT_WIDTH, PORT_HEIGHT);
+    /*
+    fullScreen();
+    PORT_WIDTH = width;
+    PORT_HEIGHT = height;
+    */
     main = new Main();
     handler = main.handler;
 

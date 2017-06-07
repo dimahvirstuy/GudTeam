@@ -91,21 +91,26 @@ public class StartScreen {
         handler.addObject( new CollisionTest( 90, 30 ) );
         handler.addObject( new CollisionTest( 30, 90 ) );
         */
-        for(float xx = 0; xx < PORT_WIDTH; xx+=64f) {
+        /*for(float xx = 0; xx < PORT_WIDTH; xx+=64f) {
             handler.addObject( new CollisionTest(xx, 200) );
             /*for(float yy = 0; yy < PORT_HEIGHT; yy+=15f) {
                 handler.addObject( new CollisionTest(xx, yy) );
-            }*/
-        }
+            }
+        }*/
 
         for(int i = 0; i < 30; i++) {
             main.spawnRandomPerson();
         }
-        handler.addObject( new CollisionTest(16, 200 - 16) );
-        handler.addObject( new CollisionTest(64 - 16, 200 - 16) );
+        /*handler.addObject( new CollisionTest(16, 200 - 16) );
+        handler.addObject( new CollisionTest(64 - 16, 200 - 16) );*/
 
-        handler.addObject( new DropOffZone( -200, -100, 100, 100, PERSON_COLOR.RED ) );
+        handler.addObject( new DropOffZone( 1483, 1032, 16*10, 16*10, PERSON_COLOR.BLUE ) );
+        handler.addObject( new DropOffZone( 769, 7, 16*10, 16*10, PERSON_COLOR.RED ) );
+        handler.addObject( new DropOffZone( 84, 1098, 16*10, 16*10, PERSON_COLOR.YELLOW ) );
+        
+        /*handler.addObject( new DropOffZone( -200, -100, 100, 100, PERSON_COLOR.RED ) );
         handler.addObject( new DropOffZone( -200, 100, 100, 100, PERSON_COLOR.BLUE ) );
         handler.addObject( new DropOffZone( -200, 300, 100, 100, PERSON_COLOR.YELLOW ) );
+        */
     } 
 }
