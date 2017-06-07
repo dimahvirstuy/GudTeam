@@ -4,7 +4,7 @@
  * ALL PROCESSING SPECIFIC FUNCTIONS GO HERE
  * avoid using processing functions (setup, draw, ect) anywhere else
  *******************************/
-// Universal Objects
+
 Main main;
 Camera camera;
 GameObjectHandler handler;

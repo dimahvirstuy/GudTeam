@@ -6,7 +6,9 @@
 public class Main {
 
     public GameObjectHandler handler;
-    
+
+    private StartScreen startScreen;
+
     public float dTime; // delta time. Used for movement
     private long lastTime;
     private float lastTimeFactor = (1f / (1000 * 1000)) * (1f / 60f);
@@ -16,7 +18,8 @@ public class Main {
     }
 
     public void initialize() {
-        Player player = new Player(0,0);
+        startScreen = new StartScreen();
+        /*Player player = new Player(0,0);
         handler.addObject( player );
         handler.player = player; // for ease of access
 
@@ -30,12 +33,12 @@ public class Main {
         /*handler.addObject( new CollisionTest( 30, 30 ) );
         handler.addObject( new CollisionTest( 90, 30 ) );
         handler.addObject( new CollisionTest( 30, 90 ) );
-        */
+        
         for(float xx = 0; xx < PORT_WIDTH; xx+=64f) {
             handler.addObject( new CollisionTest(xx, 200) );
             /*for(float yy = 0; yy < PORT_HEIGHT; yy+=15f) {
                 handler.addObject( new CollisionTest(xx, yy) );
-            }*/
+            }
         }
 
         for(int i = 0; i < 30; i++) {
@@ -54,6 +57,7 @@ public class Main {
                     break;
             }
             handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, col) );
+            
         }
 
         handler.addObject( new CollisionTest(16, 200 - 16) );
@@ -62,7 +66,7 @@ public class Main {
         handler.addObject( new DropOffZone( -100, -100, 50, 50, PERSON_COLOR.RED ) );
         handler.addObject( new DropOffZone( -100, 100, 50, 50, PERSON_COLOR.BLUE ) );
         handler.addObject( new DropOffZone( -100, 300, 50, 50, PERSON_COLOR.YELLOW ) );
-
+        */
         lastTime = System.nanoTime();
     }
 
@@ -84,9 +88,14 @@ public class Main {
                 rect(xx, yy, d, d);
             } 
         }
-        
 
         handler.loopAll(true, true);
         Input.updatePostTick();
+
+        if (!startScreen.startGame) {
+            startScreen.update();
+            startScreen.renderGUI();
+        }
+
     }
 }

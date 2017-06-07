@@ -83,8 +83,8 @@ public class Player extends GameObjectPhysics {
         velMagnitude = (velMagnitude > maxSpeed) ? maxSpeed : velMagnitude;
 
         // Follow player
-        camera.xPos = x - camera.viewWidth / 2;
-        camera.yPos = y - camera.viewHeight / 2;
+        camera.xPos += 0.3 * ( (x - camera.viewWidth / 2) - camera.xPos ) ;
+        camera.yPos += 0.3 * ( (y - camera.viewHeight / 2) - camera.yPos);
 
         // breaking
         if (Input.keyPress( (int)' ' )) {
