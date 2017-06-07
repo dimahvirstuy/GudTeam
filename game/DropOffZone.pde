@@ -30,8 +30,21 @@ public class DropOffZone extends GameObjectPhysics {
     public void render() {
         // draw gate?
         noFill();
-        stroke( color(255, 0, 0) );
+        colorMode( RGB );
+        switch( col ) {
+            case RED:
+                stroke( color(255, 0, 0) );
+                break;
+            case BLUE:
+                stroke( color(0, 0, 255) );
+                break;
+            case YELLOW:
+                stroke( color(255, 255, 0) );
+                break;
+            default:
+                break;
+        }
         rect(x, y, w, h);
     }
-    
+
 }

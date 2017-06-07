@@ -170,6 +170,8 @@ public class Player extends GameObjectPhysics {
                     funEffectBump = 1.0f;
                     funEffect = 0f;
                 }
+                // SPAWN ANOTHER GUY after picking one up to compensate
+                main.spawnRandomPerson();
             }
         }
 

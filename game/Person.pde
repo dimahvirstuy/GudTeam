@@ -38,7 +38,7 @@ public class Person extends GameObjectPhysics {
             case YELLOW:
                 return resources.SPR_PERSON_YELLOW;
             default: 
-                return null;
+                  return null;
         }
     }
 

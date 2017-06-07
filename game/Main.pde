@@ -70,6 +70,25 @@ public class Main {
         lastTime = System.nanoTime();
     }
 
+    // Spawns a random person at a random position
+    public void spawnRandomPerson() {
+        int rand = (int) (Math.random() * 3);
+        PERSON_COLOR col;
+        switch (rand) {
+            case 0:
+                col = PERSON_COLOR.BLUE;
+                break;
+            case 1:
+                col = PERSON_COLOR.RED;
+                break;
+            case 2:
+            default:
+                col = PERSON_COLOR.YELLOW;
+                break;
+        }
+        handler.addObject( new Person( (float)Math.random() * 1900, 250 + (float)Math.random() * 1900, col) );
+    }
+
     public void update() {
 
         long currentTime = System.nanoTime();
