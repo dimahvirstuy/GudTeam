@@ -20,7 +20,7 @@ public class StartScreen {
                 openMenu = true;
             }
         } else {
-            slideIn += 0.02f;
+            slideIn += 0.01f;
         }
 
         xOffset *= 0.99;
@@ -44,12 +44,18 @@ public class StartScreen {
         pushMatrix();
 
         translate(camera.xPos, 0);
-        textSize(80);
         colorMode( RGB );
+
+        textSize(20);
+        fill( color( 0, 0, 0) );
+        String gudTeam = "GudTeam presents...";
+        text(gudTeam, PORT_WIDTH/2 - textWidth(gudTeam)/2, 24);
+        
+        textSize(80);
         fill( color(255, 255, 0) );
         float h = 128;
-        text("Yellow ", PORT_WIDTH/2 - textWidth("Yellow ") - PORT_WIDTH*slideIn, h);
-        text("Car", PORT_WIDTH/2 + PORT_WIDTH*slideIn, h);
+        text("Yellow ", PORT_WIDTH/2 - textWidth("Yellow ") - 2*PORT_WIDTH*slideIn, h);
+        text("Car", PORT_WIDTH/2 + 2*PORT_WIDTH*slideIn, h);
         if (!startGame && openMenu) {
             int intensity = (int) (100 + 100 * Math.sin(0.005 * millis()));
             fill( color( intensity, intensity, intensity ) );
