@@ -14,6 +14,7 @@ Adris: Refine quad tree collision detection
 Adris: Create platformer player
 
 ** 05/22/17
+gravity, elliptical orbit, and item arm movement simulations
 
 ** 05/23/17
 
@@ -49,9 +50,10 @@ Adris: Implement timer and score GUI. Add fun pickup effect
 ** 06/05/17
 
 ** 06/06/17
-Adris: Implement start screen, game over mechanism, map loading and 
+Adris: Implement start screen, game over mechanism, map loading
 
 ** 06/07/17
+completed map textures, stitched together 1 map
 
 ** 06/08/17
 

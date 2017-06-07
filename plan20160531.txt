@@ -1,10 +1,10 @@
     Which jobs are most crucial?
-    
+     car driving mechanics, collision detection
     Which components constitute core functionality (vs non-essential)?
-    
+     control of and interactions between the user and game objects are essential
     Which components are prerequisites for others?
-    
+      car driving must be completed before pickup & drop-off of people can be considered
     Which tasks can be delegated, and which must be collaboratively tackled?
-    
+      all tasks can be delegated
     What is the timeline, and how does it accommodate setbacks, course changes?
-    
+      
