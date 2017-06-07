@@ -47,9 +47,11 @@ public class StartScreen {
         colorMode( RGB );
 
         textSize(20);
-        fill( color( 0, 0, 0) );
-        String gudTeam = "GudTeam presents...";
-        text(gudTeam, PORT_WIDTH/2 - textWidth(gudTeam)/2, 24);
+        if (!startGame) {
+            fill( color( 0, 0, 0) );
+            String gudTeam = "GudTeam presents...";
+            text(gudTeam, PORT_WIDTH/2 - textWidth(gudTeam)/2, 24);
+        }
         
         textSize(80);
         fill( color(255, 255, 0) );
